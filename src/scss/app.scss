@@ -7,3 +7,10 @@ body {
 h1 {
   color: white;
 }
+
+h1:hover {
+  color: red;
+  transition: color 1s ease;
+  display: inline-block;
+  transform: translateX(25%);
+}
