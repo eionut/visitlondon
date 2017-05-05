@@ -16,6 +16,7 @@ var SOURCEPATH = {
 var APPPATH = {
     root: 'app/',
     css: 'app/css',
+    fonts: 'app/fonts',
     js: 'app/js'
 };
 
@@ -42,6 +43,11 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(APPPATH.css));
 });
 
+gulp.task('moveFonts', function() {
+   gulp.src('./node_modules/bootstrap/dist/fonts/*.{eot,svg,ttf,woff,woff2}')
+       .pipe(gulp.dest(APPPATH.fonts));
+});
+
 gulp.task('scripts', ['clean-scripts'], function() {
    gulp.src(SOURCEPATH.jsSource)
        .pipe(concat('main.js'))
@@ -62,7 +68,7 @@ gulp.task('serve', ['sass'], function() {
    })
 });
 
-gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts', 'scripts'], function() {
+gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts', 'scripts', 'moveFonts'], function() {
     gulp.watch([SOURCEPATH.sassSource], ['sass']);
     gulp.watch([SOURCEPATH.htmlSource], ['copy']);
     gulp.watch([SOURCEPATH.jsSource], ['scripts']);
