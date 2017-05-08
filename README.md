@@ -1,7 +1,7 @@
 # My frontend workflow with Sass, NPM and Gulp
 My web Workflow with NPM, SASS, Gulp and more
 
-#Instructions
+# Instructions
 1.  Clone this repo
 2.  Make sure you have this installed:
     - [node.js](http://nodejs.org/)
