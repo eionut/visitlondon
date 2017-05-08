@@ -1,16 +1,15 @@
-$black: #f00;
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,700|Open+Sans:400,700);
 
-body {
-  background-color: cornflowerblue;
-}
-
-h1 {
-  color: white;
-}
-
-h1:hover {
-  color: red;
-  transition: color 1s ease;
-  display: inline-block;
-  transform: translateX(25%);
-}
+@import "variables";
+@import "mixins";
+@import "typography";
+@import "layout";
+@import "grid";
+@import "navigation";
+@import "background";
+@import "card";
+@import "buttons";
+@import "gallery";
+@import "tables";
+@import "services";
+@import "footer";

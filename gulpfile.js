@@ -17,6 +17,7 @@ var htmlmin = require('gulp-htmlmin');
 
 var SOURCEPATH = {
     sassSource: 'src/scss/*.scss',
+    sassApp: 'src/scss/app.scss',
     htmlSource: 'src/*.html',
     htmlPartialSource: 'src/partial/*.html',
     jsSource: 'src/js/**',
@@ -40,18 +41,15 @@ gulp.task('clean-scripts', function() {
         .pipe(clean());
 });
 
-/*gulp.task('sass', function() {
-    var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
+gulp.task('sass', function() {
     var sassFiles;
 
-    sassFiles = gulp.src(SOURCEPATH.sassSource)
+    return sassFiles = gulp.src(SOURCEPATH.sassApp)
         .pipe(autoprefixer())
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError));
-
-    return merge(bootstrapCSS, sassFiles)
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(concat('app.css'))
         .pipe(gulp.dest(APPPATH.css));
-});*/
+});
 
 gulp.task('images', function() {
     return gulp.src(SOURCEPATH.imgSource)
@@ -59,11 +57,6 @@ gulp.task('images', function() {
         .pipe(imagemin())
         .pipe(gulp.dest(APPPATH.img));
 
-});
-
-gulp.task('moveFonts', function() {
-   gulp.src('./node_modules/bootstrap/dist/fonts/*.{eot,svg,ttf,woff,woff2}')
-       .pipe(gulp.dest(APPPATH.fonts));
 });
 
 gulp.task('scripts', ['clean-scripts'], function() {
@@ -84,14 +77,11 @@ gulp.task('compress', function() {
 });
 
 gulp.task('compresscss', function() {
-    var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
     var sassFiles;
 
-    sassFiles = gulp.src(SOURCEPATH.sassSource)
+    return sassFiles = gulp.src(SOURCEPATH.sassSource)
         .pipe(autoprefixer())
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError));
-
-    return merge(bootstrapCSS, sassFiles)
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(concat('app.css'))
         .pipe(cssmin())
         .pipe(rename({suffix: '.min'}))
@@ -126,7 +116,7 @@ gulp.task('serve', ['sass'], function() {
    })
 });
 
-gulp.task('watch', ['serve', 'sass', 'clean-html', 'clean-scripts', 'scripts', 'moveFonts', 'images', 'html'], function() {
+gulp.task('watch', ['serve', 'sass', 'clean-html', 'clean-scripts', 'scripts', 'images', 'html'], function() {
     gulp.watch([SOURCEPATH.sassSource], ['sass']);
     // gulp.watch([SOURCEPATH.htmlSource], ['copy']);
     gulp.watch([SOURCEPATH.jsSource], ['scripts']);
